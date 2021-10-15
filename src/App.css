@@ -1,0 +1,5 @@
+@import '~antd/dist/antd.css';
+.App{
+    display: flex;
+    justify-content: center;
+}
