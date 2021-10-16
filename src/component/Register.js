@@ -39,8 +39,8 @@ const Register = () => {
                     />
                 </FormItem>
                 <FormItem 
-                    label="Other Name(s)" 
-                    name="othernames"
+                    label="Firstname" 
+                    name="firstname"
                     rules={[
                         {
                         required: true,
