@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
-import { message, Form, Input, Button, Typography,Te} from 'antd';
+import { message, Form, Input, Button, Typography} from 'antd';
 import { useHistory } from 'react-router';
 
 const {Paragraph, Text} = Typography;

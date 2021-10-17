@@ -1,74 +1,81 @@
 import React, {useState} from 'react';
 import styled from '@emotion/styled';
-import { message, Form, Input, Button, Typography} from 'antd';
+import { message, Form, Input, Button, Typography, Select} from 'antd';
 import { useHistory } from 'react-router';
+
 import signIn from '../apis/signIn';
+import { yearOptions } from '../utils/functions';
 
 const {Paragraph} = Typography;
+const {Option} = Select;
 
-const Login = () => {
+const FIleAssessment = () => {
     const [loading, setLoading] = useState(false);
     const history = useHistory();
     const onFinish = (formDetails) => {
         setLoading(true);
-        const userData = JSON.parse(localStorage.getItem('__details'));
-        if (!userData) {
-            setLoading(false);
-            return message.error("Invalid credentials!");
-        }
-        if(userData.username !== formDetails.username){
-            setLoading(false);
-            return message.error("Invalid username!")
-        };
-        if(userData.password !== formDetails.password) {
-            setLoading(false);
-            return message.error("Incorrect password!")
-        };
-        message.success("Login successful!")
         setTimeout(() => {
             setLoading(false);
-            history.push("/fileAssessment");
-        }, 2000);
+            return message.success("File Assessment Successful!");
+        }, 2500);
     }
     return (
         <Container>
-            <P>Log In</P>
+            <P>File Assessment</P>
             <Form onFinish={onFinish} layout="vertical">
                 <FormItem 
-                    label="Username" 
-                    name="username"
+                    label="Assessment Year" 
+                    name="year"
                     rules={[
                         {
                         required: true,
-                        message: 'Username is required'
+                        message: 'Field is required'
                         }
                     ]}>
-                    <StyledInput  placeholder="username" 
-                        
-                    />
+                     <Select defaultValue="2021">
+                            {
+                                yearOptions().map(year => 
+                                <Option value={year.toString()}>{year.toString()}</Option>)
+                            } 
+                        </Select>
                 </FormItem>
                 <FormItem 
-                    label="Password" 
-                    name="password"
+                    label="Assessment Amount" 
+                    name="amount"
                     rules={[
                         {
                         required: true,
-                        message: 'Password  is required'
+                        message: 'Field  is required'
                         }
                     ]}>
-                    <StyledInput placeholder="password"/>
+                    <StyledInput placeholder="enter..."/>
                 </FormItem>
+                <Form.Item 
+                        label="Assessment Type" 
+                        name="type" 
+                        rules={[
+                            {
+                              required: true,
+                              message: 'Field is required'
+                            }
+                        ]} 
+                    >
+                        <Select defaultValue="PAYE">
+                            <Option value="PAYE">PAYE</Option>
+                            <Option value="VAT">VAT</Option>
+                            <Option value="WHT">WHT</Option>
+                        </Select>
+                    </Form.Item>
                 <FormItem 
                    >
-                    <Submit  htmlType="submit" loading={loading}>Log In</Submit>
+                    <Submit  htmlType="submit" loading={loading}>Send</Submit>
                 </FormItem>
             </Form>
-            <Para>Don't have an Account? <Sp onClick={()=> history.push("/register")}>SignUp</Sp></Para>
         </Container>
     )
 }
 
-export default Login;
+export default FIleAssessment;
 
 const Container = styled.div`
     height: 30rem;

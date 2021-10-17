@@ -4,6 +4,7 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Register from './component/Register';
 import Login from './component/Login';
+import FIleAssessment from './component/FileAssessment';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
           </Route>
           <Route exact path="/">
               <Login/>
+          </Route>
+          <Route exact path="/fileAssessment">
+              <FIleAssessment/>
           </Route>
         </Switch>
       </Router>
